@@ -1,4 +1,4 @@
-# EEG Emotional Memory Classification — TMR Sleep Decoding
+EEG Emotional Memory Classification — TMR Sleep Decoding
 
 A pipeline for decoding emotional vs. neutral memory reactivation from EEG signals recorded during NREM sleep, built for the *EEG Emotional Memory Classification Challenge* (Targeted Memory Reactivation / TMR).
 
