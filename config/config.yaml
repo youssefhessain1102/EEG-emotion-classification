@@ -1,0 +1,32 @@
+paths:
+  train_path: "../../../emotion_data/training"
+  test_path: "../../../emotion_data/testing"
+  output_dir: "./outputs"
+  submission_file: "submission.csv"
+
+signal_processing:
+  n_channels: 16
+  n_timepoints: 200
+  sampling_rate: 200
+  freq_band:
+    min: 4
+    max: 8
+
+features:
+  window_min: 70
+  window_max: 130
+  n_cov_features: 150 # 136 cov + 7 Log-DASM + 7 Log-RASM
+  asymmetry_pairs:
+    - [0, 1]   # C3 / C4
+    - [5, 6]   # F3 / F4
+    - [4, 7]   # CP3 / CP4
+    - [11, 15] # CP5 / CP6
+    - [8, 10]  # C5 / C6
+    - [12, 14] # P7 / P8
+    - [2, 3]   # O1 / O2
+
+model:
+  solver: "lsqr"
+  shrinkage: "auto"
+  feature_selection:
+    best_k: 75
