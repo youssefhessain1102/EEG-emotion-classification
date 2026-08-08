@@ -76,14 +76,12 @@ Reads `config/config.yaml`, expects training data under `paths.train_path` (with
 - **Per-participant scaling everywhere**: `RobustScaler` and the final z-score are fit independently on each participant's own trials. Cross-participant EEG variability is the central challenge of this task — mixing scaling statistics across participants would leak information and hurt generalization.
 - **Covariance window (70:130)**: restricts the covariance computation to a mid-epoch window rather than the full 200 samples, reducing edge artifacts and focusing on the period most discriminative for theta. This window has not yet been separately validated for the alpha-band asymmetry features — it's currently reused as a starting assumption, not a confirmed choice for that band.
 - **Coefficient-stability feature selection**: rewards features that are both large in magnitude *and* consistent in direction across LOPO folds — a heuristic for picking features likely to generalize to new participants rather than overfitting to training-set idiosyncrasies. This is also the mechanism relied on to judge whether new feature additions (like asymmetry) are actually earning their place, rather than deciding by assumption.
-- **Vectorized filtering and dtype management**: bandpass filtering is applied to the full `(trials, channels, time)` array in one `sosfiltfilt` call (via its `axis` parameter) rather than looping per trial/channel in Python, and arrays are kept in `float32`. Both changes were made to manage memory and runtime in a RAM-constrained environment (Google Colab) once a second (alpha) filtering pass was added for asymmetry features.
-
+- **Vectorized filtering and dtype management**: bandpass filtering is applied to the full `(trials, channels, time)` array in one `sosfiltfilt` call (via its `axis` parameter) rather than looping per trial/channel in Python, and arrays are kept in `float32`. Both changes were made to manage memory and runtime in a RAM-constrained environment (Google Colab).
+- **The hemispheric asymmetry features**: (DASM/RASM, raw-power computation) are motivated by the frontal-asymmetry literature in EEG emotion research. All other pipeline engineering — data loading, LOPO validation structure, per-participant scaling strategy, memory optimization, training/inference orchestration, and configuration — was implemented independently.
+  
 ## Credits
-
-The the fixed analysis window `[70:130]`, and the coefficient-stability feature-selection method were adapted from **Eng. Mohamed Samy**'s pipeline for this same competition (2nd place), shared here:
+The fixed analysis window `[70:130]`, and the coefficient-stability feature-selection method were adapted from **Eng. Mohamed Samy**'s pipeline for this same competition (2nd place), shared here:
 [MohamedQiqa/eeg-emotion-classification-pipeline](https://github.com/MohamedQiqa/eeg-emotion-classification-pipeline/blob/master/_research_architecture/01_pipeline_blueprint.md)
-
-The hemispheric asymmetry features (DASM/RASM, raw-power computation, alpha-band extension) are an independent addition on top of that base, motivated by the frontal-asymmetry literature in EEG emotion research. All other pipeline engineering — data loading, LOPO validation structure, per-participant scaling strategy, memory optimization, training/inference orchestration, and configuration — was implemented independently. Code was refactored for clarity with the help of an LLM assistant, but every part of the pipeline is understood and was validated by the author.
 
 ## Competition
 
