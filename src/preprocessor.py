@@ -80,7 +80,7 @@ def preprocess_participant_trials(trials: np.ndarray, config: dict) -> np.ndarra
                 13,
                 sp_cfg["sampling_rate"],
             )
-    asymmetric_features = extract_raw_asymmetry_features(data_filtered_alpha, feat_cfg["asymmetry_pairs"], feat_cfg["window_min"], feat_cfg["window_max"])
+    asymmetric_features = extract_raw_asymmetry_features(data_filtered_alpha, feat_cfg["asymmetry_pairs"], 60, 180)
     del data_filtered_alpha
 
     data_filtered_theta = np.zeros_like(trials)

@@ -38,11 +38,10 @@ Test-participant trials go through the identical preprocessing pipeline (same th
 
 | Configuration | Leaderboard AUC |
 |---|---|
-| Theta covariance only, RobustScaler (no asymmetry) | **0.553** |
+| + asymmetry (raw power, pre-scaling), RobustScaler | 0.551 |
 | + asymmetry (post-scaling covariance diagonal), RobustScaler | 0.545 |
 | + asymmetry (post-scaling covariance diagonal), z-score | 0.542 |
-| + asymmetry (raw power, pre-scaling), RobustScaler | 0.551 |
-| Baseline (starter notebook, Hilbert power + plain LDA) | ~0.52 |
+| Baseline (starter notebook, Hilbert power + plain LDA) | ~0.516 |
 
 The raw-power asymmetry computation closed most of the gap versus the post-scaling version, confirming the hypothesis that `RobustScaler`'s shrinkage was destabilizing the log-power asymmetry features rather than the underlying idea being unhelpful. DASM-only and alpha-band asymmetry variants are still being evaluated via LOPO before further leaderboard submissions.
 
@@ -84,5 +83,6 @@ The hemispheric asymmetry features (DASM/RASM, raw-power computation, alpha-band
 
 ## Competition
 
-Based on the *EEG Emotional Memory Classification Challenge* — decoding memory reactivation during NREM sleep via Targeted Memory Reactivation (TMR). See the competition's starter notebook and dataset description for full experimental background.#   E E G - e m o t i o n - c l a s s i f i c a t i o n  
+Based on the *EEG Emotional Memory Classification Challenge* — decoding memory reactivation during NREM sleep via Targeted Memory Reactivation (TMR). See the competition's starter notebook and dataset description for full experimental background.#   E E G - e m o t i o n - c l a s s i f i c a t i o n 
+ 
  
